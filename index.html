@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Love Letter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+        :root {
+            --bg-color: #e5e5e5;
+            --paper-color: #ffffff;
+            --text-main: #1a1a1a;
+            --text-light: #595959;
+            --border-color: #cccccc;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Lora', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .book-container {
+            background-color: var(--paper-color);
+            width: 90%;
+            max-width: 650px;
+            min-height: 75vh;
+            padding: 4rem 4rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page {
+            display: none;
+            opacity: 0;
+            flex-grow: 1;
+            flex-direction: column;
+            justify-content: center;
+            animation: fadeIn 0.8s forwards;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            text-align: center;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .landing-title {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+            color: var(--text-main);
+            font-weight: 400;
+        }
+
+        b, strong {
+            font-weight: 600;
+            color: #000000;
+        }
+
+        i, em {
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        u {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+        }
+
+        .blank-space {
+            height: 1.5rem;
+            display: block;
+        }
+
+        .centered-text {
+            text-align: center;
+            font-size: 1.15rem;
+        }
+
+        .intro-note {
+            text-align: center;
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-top: 3rem;
+            max-width: 80%;
+            align-self: center;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        .btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            color: var(--text-light);
+        }
+
+        .btn:disabled {
+            color: transparent;
+            cursor: default;
+        }
+
+        .page-indicator {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-family: 'Playfair Display', serif;
+            align-self: center;
+            font-style: italic;
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 600px) {
+            .book-container {
+                width: 100%;
+                min-height: 100vh;
+                padding: 1.5rem 1.2rem;
+                border: none;
+                box-shadow: none;
+                justify-content: flex-start;
+            }
+            
+            .page {
+                justify-content: flex-start;
+                padding-top: 1rem;
+            }
+
+            .landing-title {
+                font-size: 1.8rem;
+                margin-top: 20vh;
+            }
+
+            p {
+                font-size: 0.95rem;
+                line-height: 1.65;
+                margin-bottom: 1rem;
+            }
+
+            .centered-text {
+                font-size: 1rem;
+            }
+
+            .blank-space {
+                height: 1rem;
+            }
+
+            .intro-note {
+                font-size: 0.85rem;
+                margin-top: 2rem;
+                max-width: 95%;
+            }
+
+            .controls {
+                margin-top: 2rem;
+                padding-top: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.5rem;
+            }
+
+            .page-indicator {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="book-container">
+        
+        <div class="page active" id="page-0">
+            <h1 class="landing-title">a love letter,<br>for my tinatangi.</h1>
+            <p class="intro-note"><i>there are page counts in this page as i want you to take pauses if you feel like the letter becomes too overwhelming for you so you can go back to where you paused earlier</i></p>
+        </div>
+
+        <div class="page" id="page-1">
+            <p>Hello <b>Vlad</b>,</p>
+            <p>I hope you read the entirety of this message, because who are you if you don’t love poetic and beautifully written messages, right? I will try to type all of this without the help of any grammar helping tools. I know we've tried so hard to understand, but we can't, and I know that you can feel the pressure that is getting closer now more than ever. <b>I am afraid, Vlad.</b> I've seen love die, way too many times. The thought alone that we are letting this love die, is not the best thought to think in times where we are both so sure that we need love, not to help us out of the problem, but <u>love that gives us a reason to fight</u>, even if it means that staying in this world is not guaranteed. If you run away, I’d still wave goodbye. Watching you shine bright even if it’s without me, is probably one of the things that would keep me afloat while I am drowning.</p> 
+            <span class="blank-space"></span>
+            <p>Here we go again, with all the things we said, saying this again because getting tired is not in my list. I want to apologize for all of the words I threw at you. Those chats made me regret that night so bad, to the point where I haven’t been functioning very well. I'll never let this go, but I can't find the words to tell you… <i>I don't wanna be alone, Vlad</i>, and most of all, I don’t want you to be alone. We're doing fine, and it gets better every time. I hope this thought comes into your mind, and if we aren’t getting better, I still wish we had the opportunity to see each other through it.</p>
+        </div>
+
+        <div class="page" id="page-2">
+            <p>Sometimes, when I am alone in my thoughts, I always come up with the idea that maybe inside your mind, you are asking <i>“and when all security fails, will you be there to help me through?"</i> or so I hope. <b>Vlad</b>, could you remind me of a time when we were so alive? Do you remember that? We were so in love, and we both felt that, and I am yearning for still feeling it with you. This heart? This heart, it beats, beats for only you, <b>Vlad</b>, and that is all I know. <u>I won't let you fall away from me, Vlad</u>, and that is enough reason for me to know that I am still completely in love with you. Even when I'm alone I hear your mellow drone with you and I will do everything in my power to chase you and run after you.</p>
+            <span class="blank-space"></span>
+            <p>Take this time to realize that you always force a smile in times where all you need is a cry, and I know why, it is because you cannot cry, and that alone is enough for me to try and stay during this time where you are having a battle with destiny. <i>“There goes my hero, he is ordinary,”</i> is a stuff I would say if I am from afar watching you buy me matcha, soon, during my saddest times. What a shame we all became such fragile broken things, which was my mistake because one of us could’ve been stronger, and that would be me since the problems I had were big but not as big as yours is. I acknowledge that both of us are going through something, but I would’ve been able to take mine a little easier so I could still be the strong one because you’ve never had anyone to stand up for you. I wanted to be that someone. <i>“Haha, Bon, That's what you get when you let your heart win,”</i> is a part of my daily conversation with myself. I always tell myself lately that <i>“I hope, somehow everything's gonna fall right into place."</i> <u>I'm in the business of misery right now, Vlad.</u></p> 
+        </div>
+
+        <div class="page" id="page-3">
+            <p>I know that when it rains on this side of town, it touches everything, I get it, <b>Vlad</b>, but I hope that just this once, you would allow someone to stay with you, because someone is willing to get wet as long as it’s with you. This is how we'll stand when we burn our bridges down for I've gone for too long living like I'm not alive, and you came and saved me from a life so close to total isolation. Nothing compares to a quiet evening alone with you, <b>Vlad</b>. I hope somewhere inside you, is the thought that you are going to save us, for both of us are broken... <u>save us</u>. <b>Vlad</b>, it's obvious that you're dying, it’s so obvious and <u>it scares me</u> to see you in a state where I am unable to help at all. So I will sing the song of love, like it’s the last song I will ever sing, so you would finally understand that someone is always here for you, <b>Vlad</b>. I’ve grown so attached to your entire being, that letting go feels like letting go of myself as well, cause anyone can see that this is only permanent, but I see this as something more than a love that could potentially last a lifetime but a love that could exist in every dimension that there could possibly be.</p>
+            <span class="blank-space"></span>
+            <p>I want to rewind to the first time that I felt it coming, <b>Vlad</b>. I would’ve been able to help and tell you a lot of things that would’ve helped. I would’ve wipe the tears from your eyes, even if there weren’t any. How did we get here? I used to know you so well. I still wonder, <b>Vlad</b>. I mourn for the loss of our love, <b>Vlad</b>. I mourn the death of the child we never got to raise, <b>Vlad</b>. I mourn the destruction of the house that we did not even build yet. I caught myself for smiling last night. Seeing you play CODM made me feel like you were there again, before May 30th, waiting for me. <u>Vlad, consider coming back</u> and I won't be the one to disappoint you anymore, May angels lead you in back into my arms, <b>Vlad</b>. Yet again, there is this uncertainty that I'm gonna go on living like I never met you, and it'll feel wrong at first, but if that were to happen, I will try my best to live my life even if it means there is a possibility that I might lose myself in the process of trying to live a life without you in it.</p>
+            <p><b>For you were the one who has been keeping me sane, Vlad.</b></p>
+        </div>
+
+        <div class="page" id="page-4">
+            <p>I'll stop the whole world from turning into a monster for you, if you allow me once again to enter your life. To stay with you, for good. Back then, the sparks are flying and now it's a cold world. I hope you can finally say <i>"In the mourning I'll rise,”</i> for you deserve to rise from anything that holds you down right now, <b>Vlad</b>. <b>Vlad</b>, I’m sorry. <u>The truth never set me free, so I did it myself.</u> I attacked you for a reason I was blinded by because of the emotions I felt that night. It's not a war, no, it's not a rapture, it was me being dumb with my decisions. I promise that the next time you point a finger, I'll point you to the mirror so as to stop assigning blame and look inward into the situation itself. <b>Vlad</b>, If you still feel lost keep your feet on the ground, when your head's in the clouds, I will be the one to anchor your feet, so as to stop you from flying too high.</p>
+            <span class="blank-space"></span>
+            <p><b>Vlad</b>, I am more than willing to stay, I scrape my knees while I'm praying for you and your well being and I won’t feel any pain because the <b>love I have would be bigger than the pain itself</b>. I am having a hard time accepting the world right now, <b>Vlad</b>, but you are the only exception. I’m sorry if I lacked the emotional capacity back then to withdraw and think first before blurting something out, I feel no sympathy, you live inside a cave, I was being dumb for always being on your neck. I cannot wait to feel safe again and say <i>“I can't believe we almost hung it up,”</i> for I know that no one is as lucky as us for meeting each other. We're just misguided ghosts, but know that when I was lost, all I wanted was you, and I hope that is enough reason for you to feel my love. For I know that we just want a chance to feel alive, I myself would love to think that a fresh start and a renewed commitment to shared joy is all we need. If there's a future, we want it, now. <b>Bonbon</b> and I want that future now, with <b>Vlad</b> and <b>Vlavla</b>. This time, I will do it a lot better, for some of us have to grow up sometimes. I will let go of the bad things I was doing in the past, and it's not that I won't remember where I'm from, but in order for me to start anew. I could be angry, but you're not worth the fight, <b>Vlad</b>. I really love you so much, I cannot be angry at you for hours. Let’s promise each other when we get back together, to be the source of rest for each other’s weary hearts. Ain't it fun living in the real world, where this is the rest we practice? It’s just a shame though that we will be fragile beings, and what a shame we all remained such fragile broken things. Hence, the need for us to be each other’s rest. Don’t ever think that me being mad at you equates to me being in pain because of you. You exist, and you are the reason why I’m mad afterall, and you even stay and comfort me after? It's just a spark, but it's enough to keep me going. I'm still into you, <b>Vlad</b>. Fall in love with yourself, <b>Vlad</b>, and I will do the same to myself. Find the path you are looking for even if it would take you long months.</p> 
+        </div>
+
+        <div class="page" id="page-5">
+            <p>Confusion circles my mind as I write the following paragraphs. I just went back to my dorm because I went home last night.</p>
+            <span class="blank-space"></span>
+            <p>I haven't eaten a thing, hypothetically, I haven’t had the appetite to eat but I still do because I want to continue existing until you are back. There is this discomfort inside me knowing the person who tells me every time to eat well and to stay full is not asking me anymore. It's really hard, I can't deny… I'm half the man I say I am, for they think that I am still able to function and love myself after us. How can I? <u>I hate to see your eyes get darker as they close</u>, and even if I can’t see them, I can feel them. I'm not one of those crazy girls who leaves you when you end connections with them. <b>Vlad, I'm not angry anymore...</b> <u>I don't think badly of you</u>, and I hope you do as well. <b>Vlad</b>, are you still mad at me? I hope not. If there’s anything I want you to be doing right now? You should be alone with me. For I know now how to give you the peace that your heart has been longing for. A love so pure that when worries come your way, you will not think of anything else but focus on yourself alone. Just think of the future, and think of your dreams. If you can’t think of your future, then I hope you think of our future.</p>
+            <span class="blank-space"></span>
+            <p>My <b>Vlad</b>, We've been speaking our native tongue. We’ve been telling each other we love each other in ways only two of us know. Sometimes it reaches us, but sometimes I fall short and go on being the meanest boyfriend to you before. It was because I wasn’t secure in the thought that you are indeed my boyfriend at that time. So you don't have anything to worry about. Now I understand that, and I will apply it to the next lap with you. As I write this, I'm trying to find an escape route for my own emotions. Your absence affected me in ways that I can’t even take a time to feel what I feel because there’s this comfort that your name gives me so I was able to tell it to you directly, and that is me being a jerk… <u>I am sorry.</u></p> 
+        </div>
+
+        <div class="page" id="page-6">
+            <p class="centered-text"><b>Tell me it's okay to be happy now, Vlad</b></p>
+            <span class="blank-space"></span>
+            <p>Hard times, gonna make you wonder why you even try, huh? Hard times got you so good, <b>Vlad</b>. I want you to stop crying, for your heart to stop crying. Do you like when I admit I was wrong? I do miss the moments where we admit we were wrong, I miss the time where I laugh at you for admitting your mistakes because you were so cute doing those for me. I hope you see yourself through my eyes, <b>Vlad</b>. I can see you happy when we were still together, I bet everybody here is fake happy too. I hope you hold onto hope if you got it. I hope you find peace in knowing someone out here is trying to hold onto hope that you will be fine. I hope you find peace in knowing that there are people rooting for you. If there’s none? Then consider me gone, for I will be one of your supporters until the end of time.</p> 
+            <span class="blank-space"></span>
+            <p>Can we dive back in, <b>Vlad</b>? Stop asking why, we had to waste so much time already. We know we can love each other very well. I have a fear for a future without you in it, <b>Vlad</b>. I can't think of getting old alone, it only makes me want to die, not literally, but in a sense that I might stop showing people the same love I am giving you right now. I know I can’t make you magically come back, I'm not your superhuman, but I will at least try to win you back, <b>Vlad</b>. You're no friend of mine, you are my bestfriend, you became my person, you became my boyfriend, and I want everything back, <b>Vlad</b>. <u>I want you, Vlad.</u></p>
+        </div>
+
+        <div class="page" id="page-7">
+            <p class="centered-text"><b>Tell me how to feel about you now, Vlad.</b></p>
+            <span class="blank-space"></span>
+            <p>This is my why, <b>Vlad</b>. This is why I don't leave the house. Because you smell like peace in my chaotic world. Every second, our collective heart breaks, is every second of shared emotional intimacy. I am sorry for failing to see your intentions before, <u>intentions only get you so far</u> but my mind convinces me it was not enough, but I already changed my perspective on intentions so you don’t have to worry anymore, <b>Vlad</b>. I am sorry, I'm trying to get completely well so as to avoid getting you involved in the traumas inflicted upon me by the people that came before you. <i>I can't look away, you're like a movie that I love</i>, and that alone testifies my love for you.</p>
+            <span class="blank-space"></span>
+            <p>I'll do better when you're better, <b>Vlad</b>. We do better together, please. Let us try again, continue our love, for our love gave us peace despite the times we argued. I’m sorry if we were spinnin' in an endless figure eight, I was a stubborn insecure boyfriend, and I learned that <u>I can be insecure at the same time but be secured over the label of us being boyfriends.</u> Oh, my love, I lied to you, but I never needed to, I lied when I told you I hated you, I lied when I told you I was so mad at you, I lied and lied even if deep down I knew that I was actually trying to find a way to resent you.</p>
+        </div>
+
+        <div class="page" id="page-8">
+            <p>I crave, I crave to do it again, <b>Vlad</b>. I crave to do it right this time, so as to grow together with you, and face all the problems the world throws at us. Thick skull never did nothing for me, same lesson again always, but I am learning now that my past mistakes should be corrected. Synapses are slowin' down, but this must be the void they always talk about. <b>Vlad</b>, everything is hurting us both right now, I am thinking about my things but you should know that when my mind is free, you know your melody can move me. <i>“If I let you love me, be the one adore, would you go all the way,”</i> a line fitting for the both of us. For both of us deserves a love so devoted that no one and nothing comes close to our love. A love so profound that when everything is a blur, we can easily spot each other amidst everything. But it’s okay if it’s not now, and <u>it's okay</u>, there's always another day... I don't think you meant to say goodbye. For I believe loving you means sweating all your blood. <b>Vlad</b>, I opened up my life to you. You wanted to love someone, somebody just like me, and now you're my number one... I wish I could tell you how I feel.</p>  
+            <span class="blank-space"></span>
+            <p>I never was too good with goodbyes, <b>Vlad</b>. So I hope that wasn’t a goodbye, <b>Vlad</b>. We can swim in silence, and you can pull me under, always. And under the table <u>where</u> you hide every stain, I will be making sure to wipe it, until it is gone.</p>
+        </div>
+
+        <div class="page" id="page-9">
+            <p>Your name I mentioned <b>47</b> times, a sum of both our birthdates <b>20</b> and <b>27</b>. A week apart.</p> 
+            <span class="blank-space"></span>
+            <p>Lyrics from your favorite band, embedded in each paragraph.</p> 
+            <span class="blank-space"></span>
+            <p>Each paragraph contains your name.</p>
+            <span class="blank-space"></span>
+            <p class="centered-text"><b>You.</b></p>
+            <p class="centered-text"><u>You.</u></p>
+            <p class="centered-text"><i>You.</i></p>
+            <span class="blank-space"></span>
+            <p>The first person to ever receive a letter this long from me. The first person to be loved this much by me. And I never regretted everything, not anymore. For I know that I love you. Please come back into my arms.</p>
+            <p><i>Dahil ang <u>magmahal ay mapagpalaya</u>, kaya sa susunod na takbo natin bibigyan kita ng kalayaan. Pero hindi kita mapapalaya mula sa piling ko, Oo, ang magmahal ay ang mapagpalaya, pero ang mahalin ka ay ang pagsisiguradong sa akin ka mapupunta at hindi sa taong hindi ka kayang mahalin gaya ng pagmamahal ko sa iyo.</i></p>
+            <span class="blank-space"></span>
+            <p>It's not a perfect letter, I know. It's messy, repetitive, contradictory, and overwhelming in places.</p>
+            <span class="blank-space"></span>
+            <p>But a heart that yearns is often messy, repetitive, contradictory, and overwhelming too.</p>
+        </div>
+
+        <div class="controls">
+            <button id="prevBtn" class="btn" onclick="prevPage()" disabled>Previous</button>
+            <span class="page-indicator" id="pageIndicator">Intro</span>
+            <button id="nextBtn" class="btn" onclick="nextPage()">Read</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const totalPages = document.querySelectorAll('.page').length;
+        const pages = document.querySelectorAll('.page');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const pageIndicator = document.getElementById('pageIndicator');
+
+        function updateView() {
+            pages.forEach((page, index) => {
+                if(index === currentPage) {
+                    page.classList.add('active');
+                } else {
+                    page.classList.remove('active');
+                }
+            });
+
+            prevBtn.disabled = currentPage === 0;
+            
+            if (currentPage === 0) {
+                prevBtn.innerText = "Previous";
+                nextBtn.innerText = "Read";
+                pageIndicator.innerText = "Intro";
+            } else if (currentPage === totalPages - 1) {
+                nextBtn.disabled = true;
+                nextBtn.innerText = "End";
+                pageIndicator.innerText = `${currentPage} of ${totalPages - 1}`;
+            } else {
+                nextBtn.disabled = false;
+                nextBtn.innerText = "Next Page";
+                pageIndicator.innerText = `${currentPage} of ${totalPages - 1}`;
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                updateView();
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                updateView();
+            }
+        }
+    </script>
+</body>
+</html>
